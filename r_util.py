@@ -38,7 +38,7 @@ def rLoadSettings(group_id=None, key=None):
         无参返回全部，有参返回键值
     '''
     with open(f'{path}/r_settings.json', 'r') as f:
-            settings = json.load(f)
+        settings = json.load(f)
     if not group_id:
         return settings
     else:
@@ -125,8 +125,9 @@ def rCancleChallenge(group_id, qqid=None):
     group_id = str(group_id)
     data = rLoadChallenge()
     # 删除单个与删除全部
-    if qqid and str(qqid) in data[group_id]:
-        del data[group_id][str(qqid)]
+    if qqid and group_id in data:
+        if str(qqid) in data[group_id]:
+            del data[group_id][str(qqid)]
     elif not qqid and group_id in data:
         del data[group_id]  
     with open(f'{path}/r_data_challenging.json', 'w') as f:
